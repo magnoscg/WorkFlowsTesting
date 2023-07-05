@@ -45,10 +45,10 @@ jobs:
       - name: Check xcode embedded SDKs
         run: xcodebuild -showsdks
       - name: Show buildable schemes
-        run: xcodebuild -project -list
+        run: xcodebuild -list
         working-directory: workflows
       - name: Show eligible build destinations for ${{ matrix.scheme }}
-        run: xcodebuild -project -showdestinations -scheme ${{ matrix.scheme }}
+        run: xcodebuild -showdestinations -scheme ${{ matrix.scheme }}
         working-directory: workflows
       - uses: mxcl/xcodebuild@v2.0.0
         with:
