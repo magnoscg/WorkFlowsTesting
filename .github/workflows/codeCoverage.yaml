@@ -18,7 +18,7 @@ jobs:
         scheme: ["workflows"]
         command: ["test"]
         platform: ["iOS"]
-        workspace: ["workflows"]
+        workspace: ["workflows/workflows.xcodeproj"]
         exclude:
           - macos: "macos-11"
             xcode: "12.0.1"
@@ -50,6 +50,7 @@ jobs:
       - uses: mxcl/xcodebuild@v2.0.0
         with:
           xcode: ${{ matrix.xcode }}
+          workspace: ${{ matrix.workspace }} 
           platform: ${{ matrix.platform }}
           scheme: ${{ matrix.scheme }}
           action: ${{ matrix.command }}
