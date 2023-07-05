@@ -49,8 +49,8 @@ jobs:
         run: xcodebuild -showdestinations -scheme ${{ matrix.scheme }}
       - uses: mxcl/xcodebuild@v2.0.0
         with:
+          xcode: ${{ matrix.xcode }}
           platform: ${{ matrix.platform }}
-          workspace: ${{ matrix.workspace }}
           scheme: ${{ matrix.scheme }}
           action: ${{ matrix.command }}
           code-coverage: true
