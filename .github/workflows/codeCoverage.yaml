@@ -47,7 +47,7 @@ jobs:
       - name: Show buildable schemes
         run: xcodebuild -project ${{ matrix.project}} -list
       - name: Show eligible build destinations for ${{ matrix.scheme }}
-        run: xcodebuild -showdestinations -scheme ${{ matrix.scheme }}
+        run: xcodebuild -project ${{ matrix.project}} -showdestinations -scheme ${{ matrix.scheme }}
       - uses: mxcl/xcodebuild@v2.0.0
         with:
           xcode: ${{ matrix.xcode }}
