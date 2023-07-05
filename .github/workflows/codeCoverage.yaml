@@ -53,7 +53,7 @@ jobs:
       - name: Generate report
         uses: kishikawakatsumi/xcresulttool@v1
         with:
-          path: TestResults.xcresult
+          path: workflows/TestResults
         if: success()
 
      #- name: Convert test results for codecov
