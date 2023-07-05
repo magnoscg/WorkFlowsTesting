@@ -44,6 +44,7 @@ jobs:
         run: xcodebuild -version
       - name: Check xcode embedded SDKs
         run: xcodebuild -showsdks
+      - run: cd workflows
       - name: Show buildable schemes
         run: xcodebuild -project ${{ matrix.project}} -list
       - name: Show eligible build destinations for ${{ matrix.scheme }}
