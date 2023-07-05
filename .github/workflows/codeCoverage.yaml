@@ -49,7 +49,7 @@ jobs:
         working-directory: workflows
       - name: Test
         run: |
-          xcodebuild -project ${{ matrix.project }} -scheme ${{ matrix.scheme }} -destination ${{ matrix.platform }} -resultBundlePath TestResults test
+          xcodebuild -project ${{ matrix.project }} -scheme ${{ matrix.scheme }} -destination '${{ matrix.platform }}' -resultBundlePath TestResults test
       - name: Generate report
         uses: kishikawakatsumi/xcresulttool@v1
         with:
