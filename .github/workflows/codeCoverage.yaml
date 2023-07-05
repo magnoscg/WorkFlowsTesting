@@ -49,15 +49,15 @@ jobs:
         working-directory: workflows
       - name: Test
         run: |
-          xcodebuild -project ${{ matrix.project }} -scheme ${{ matrix.scheme }} -destination '${{ matrix.platform }}' -resultBundlePath TestResults test
+          xcodebuild clean build test -project ${{ matrix.project }} -scheme ${{ matrix.scheme }} -destination '${{ matrix.platform }}' -resultBundlePath TestResults
       
       - run: ls
-      - run: ls /Users/runner/work/WorkFlowsTesting/WorkFlowsTesting/workflows
+      - run: pwd
       - name: Generate report
         uses: kishikawakatsumi/xcresulttool@v1
         with:
           path: TestResults.xcresult
-        if: success()
+        if: success() || failure()
 
      #- name: Convert test results for codecov
      #   run: xcresultparser \ --output-format cobertura \ "artifacts/ResultBundle.xcresult" >"artifacts/coverage.xml"
