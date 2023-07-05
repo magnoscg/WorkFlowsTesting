@@ -44,11 +44,12 @@ jobs:
         run: xcodebuild -version
       - name: Check xcode embedded SDKs
         run: xcodebuild -showsdks
-      - run: cd workflows
       - name: Show buildable schemes
-        run: xcodebuild -project ${{ matrix.project}} -list
+        run: xcodebuild -project -list
+        working-directory: workflows
       - name: Show eligible build destinations for ${{ matrix.scheme }}
-        run: xcodebuild -project ${{ matrix.project}} -showdestinations -scheme ${{ matrix.scheme }}
+        run: xcodebuild -project -showdestinations -scheme ${{ matrix.scheme }}
+        working-directory: workflows
       - uses: mxcl/xcodebuild@v2.0.0
         with:
           xcode: ${{ matrix.xcode }}
@@ -58,6 +59,7 @@ jobs:
           code-coverage: true
           verbosity: xcpretty
           upload-logs: always
+          working-directory: workflows
 
       - name: Test coverage
         uses: maxep/spm-lcov-action@0.3.1
