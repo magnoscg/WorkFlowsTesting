@@ -19,6 +19,8 @@ final class workflowsTests: XCTestCase {
     }
 
     func testExample() throws {
+
+        XCTAssertTrue("Hola" == "Hola")
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         // Any test you write for XCTest can be annotated as throws and async.
@@ -29,6 +31,7 @@ final class workflowsTests: XCTestCase {
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {
+            XCTAssertTrue("Hla" == "Hola")
             // Put the code you want to measure the time of here.
         }
     }
