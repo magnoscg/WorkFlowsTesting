@@ -38,7 +38,7 @@ jobs:
       - name: Code Checkout
         uses: actions/checkout@v3
       - name: list files
-        run: ls /Users/runner/work/WorkFlowsTesting/WorkFlowsTesting
+        run: ls /Users/runner/work/WorkFlowsTesting/WorkFlowsTesting/workflows
       - name: Check xcodebuild version
         run: xcodebuild -version
       - name: Check xcode embedded SDKs
