@@ -50,10 +50,13 @@ jobs:
       - name: Test
         run: |
           xcodebuild -project ${{ matrix.project }} -scheme ${{ matrix.scheme }} -destination '${{ matrix.platform }}' -resultBundlePath TestResults test
+      
+      - run: ls
+      - run: ls /Users/runner/work/WorkFlowsTesting/WorkFlowsTesting/workflows
       - name: Generate report
         uses: kishikawakatsumi/xcresulttool@v1
         with:
-          path: workflows/TestResults.xcresult
+          path: TestResults.xcresult
         if: success()
 
      #- name: Convert test results for codecov
