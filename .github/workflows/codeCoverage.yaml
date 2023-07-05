@@ -50,11 +50,8 @@ jobs:
       - name: Test
         run: |
           xcodebuild clean build test -project ${{ matrix.project }} -scheme ${{ matrix.scheme }} -destination '${{ matrix.platform }}' -resultBundlePath TestResults
-      
-      - run: ls
-      - run: pwd
       - name: Generate report
-        uses: kishikawakatsumi/xcresulttool@v1
+        uses: kishikawakatsumi/xcresulttool@v1.7.1
         with:
           path: TestResults.xcresult
         if: success() || failure()
