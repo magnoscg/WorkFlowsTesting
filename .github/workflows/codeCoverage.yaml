@@ -15,6 +15,7 @@ jobs:
       matrix:
         xcode: ["14.2"]
         macos: ["macos-latest"]
+        project: ["workflows/workflows.xcodeproj"]
         scheme: ["workflows"]
         command: ["test"]
         platform: ["iOS"]
@@ -37,9 +38,6 @@ jobs:
         run: sw_vers
       - name: Code Checkout
         uses: actions/checkout@v3
-      - uses: ./
-        with:
-          working-directory: workflows
       - name: list files
         run: ls /Users/runner/work/WorkFlowsTesting/WorkFlowsTesting/workflows
       - name: Check xcodebuild version
@@ -47,7 +45,7 @@ jobs:
       - name: Check xcode embedded SDKs
         run: xcodebuild -showsdks
       - name: Show buildable schemes
-        run: xcodebuild -list
+        run: xcodebuild -project ${{ matrix.project}} -list
       - name: Show eligible build destinations for ${{ matrix.scheme }}
         run: xcodebuild -showdestinations -scheme ${{ matrix.scheme }}
       - uses: mxcl/xcodebuild@v2.0.0
