@@ -37,6 +37,9 @@ jobs:
         run: sw_vers
       - name: Code Checkout
         uses: actions/checkout@v3
+      - uses: ./
+        with:
+          working-directory: workflows
       - name: list files
         run: ls /Users/runner/work/WorkFlowsTesting/WorkFlowsTesting/workflows
       - name: Check xcodebuild version
@@ -50,7 +53,6 @@ jobs:
       - uses: mxcl/xcodebuild@v2.0.0
         with:
           xcode: ${{ matrix.xcode }}
-          workspace: ${{ matrix.workspace }} 
           platform: ${{ matrix.platform }}
           scheme: ${{ matrix.scheme }}
           action: ${{ matrix.command }}
