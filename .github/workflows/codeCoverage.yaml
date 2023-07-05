@@ -1,0 +1,33 @@
+name: Test And Coverage Report
+
+on:
+  push:
+    branches: ["feature/**", "master"]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build-and-test:
+    runs-on: macos-latest
+
+    steps:
+    - name: check Xcode version
+      run: /usr/bin/xcodebuild -version
+
+    - name: checkout repository
+      uses: actions/checkout@v2
+
+    - name: Build and Run Tests
+      uses: sersoft-gmbh/xcodebuild-action@v2.0.1
+      with:
+        project: workflows.xcodeproj
+        scheme: workflows
+        destination: "platform=iOS Simulator,OS=16.0,name=iPhone 14"
+        action: test
+        derived-data-path: /tmp/DerivedData
+        enable-code-coverage: true
+
+    - name: Test coverage
+      uses: maxep/spm-lcov-action@0.3.1
+      with:
+        output-file: ./coverage/lcov.info
