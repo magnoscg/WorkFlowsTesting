@@ -16,7 +16,7 @@ jobs:
         project: ["workflows/workflows.xcodeproj"]
         scheme: ["workflows"]
         command: ["test"]
-        platform: ["platform=iOS Simulator,name=iPhone 14,OS=16.0"]
+        platform: ["platform=iOS Simulator,name=iPhone 14,OS=16.2"]
         exclude:
           - macos: "macos-11"
             xcode: "12.0.1"
