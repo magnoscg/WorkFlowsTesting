@@ -16,7 +16,7 @@ jobs:
         project: ["workflows/workflows.xcodeproj"]
         scheme: ["workflows"]
         command: ["test"]
-        platform: ["iOS"]
+        platform: ["platform=iOS Simulator,OS=16.0,name=iPhone 14"]
         workspace: ["workflows/workflows.xcodeproj/project.xcworkspace"]
         exclude:
           - macos: "macos-11"
@@ -50,7 +50,7 @@ jobs:
         working-directory: workflows
       - name: Test
         run: |
-          xcodebuild -project ${{ matrix.project }} -scheme ${{ matrix.scheme }} -resultBundlePath TestResults test
+          xcodebuild -project ${{ matrix.project }} -scheme ${{ matrix.scheme }} -destination ${{ matrix.platform }} -resultBundlePath TestResults test
       - name: Generate report
         uses: kishikawakatsumi/xcresulttool@v1
         with:
