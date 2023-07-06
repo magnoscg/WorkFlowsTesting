@@ -31,11 +31,6 @@ jobs:
           - platform: "watchOS"
             xcode: "12.0.1"
     steps:
-     # - name: XcresultParser install
-      #  run: |
-      #      brew tap a7ex/homebrew-formulae
-       #     brew install xcresultparser
-
       - name: Install Dependencies
         run: gem install slather
       - name: Switch xcode to ${{ matrix.xcode }}
@@ -74,9 +69,6 @@ jobs:
         with:
           path: TestResults.xcresult
         if: success() || failure()
-
-      #- name: Convert test results for codecov
-      #  run: xcresultparser -o cobertura --project-root ${{github.workspace}} "TestResults.xcresult" > "cobertura.xml"
 
       - name: Convert code coverage for CI_macOS
         run: slather coverage -x --scheme ${{ matrix.scheme }} --output-directory "reports" -b DerivedData "${{ matrix.project }}"
