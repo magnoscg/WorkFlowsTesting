@@ -8,7 +8,7 @@
 import XCTest
 @testable import workflows
 
-final class workflowsOtherTests: XCTestCase {
+final class WorkflowsOtherTests: XCTestCase {
 
     func testExample() throws {
 

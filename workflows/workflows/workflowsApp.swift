@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct workflowsApp: App {
+struct WorkflowsApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
