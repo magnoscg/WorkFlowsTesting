@@ -72,7 +72,7 @@ jobs:
           path: TestResults.xcresult
         if: success() || failure()
       - name: Convert test results for codecov
-        run: xcresultparser \ --output-format cobertura \ "artifacts/ResultBundle.xcresult" > "cobertura.xml"
+        run: xcresultparser -o cobertura TestResults.xcresult > cobertura.xml
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
