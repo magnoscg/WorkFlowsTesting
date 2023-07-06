@@ -79,13 +79,13 @@ jobs:
       #  run: xcresultparser -o cobertura --project-root ${{github.workspace}} "TestResults.xcresult" > "cobertura.xml"
 
       - name: Convert code coverage for CI_macOS
-        run: slather coverage -x --scheme ${{ matrix.scheme }} --output-directory "slather_reports/CI_macOS" -b "DerivedData" "${{ matrix.project }}"
+        run: slather coverage -x --scheme ${{ matrix.scheme }} --output-directory "reports" -b DerivedData "${{ matrix.project }}"
       
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./cobertura.xml # optional
+          files: ${{ github.workspace }}/reports/cobertura.xml # optional
           flags: unittests # optional
           name: codecov-umbrella # optional
           fail_ci_if_error: true # optional (default = false)
