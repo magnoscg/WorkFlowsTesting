@@ -20,13 +20,22 @@ final class workflowsTests: XCTestCase {
 
     func testExample() throws {
 
-        XCTAssertTrue("Hola" == "Hola")
+        self.measure {
+            for number in stride(from: 0, through: 10000, by: 1){
+                print(number)
+            }
+            XCTAssertTrue(true)
+            // Put the code you want to measure the time of here.
+        }
     }
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {
-            XCTAssertTrue("Hoa" == "Hola")
+            for number in 0...100000 {
+                print(number)
+            }
+            XCTAssertTrue(true)
             // Put the code you want to measure the time of here.
         }
     }
