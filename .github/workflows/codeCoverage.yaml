@@ -74,7 +74,7 @@ jobs:
         if: success() || failure()
       - run: ls
       - name: Convert test results for codecov
-        run: xcresultparser -o cobertura "TestResults.xcresult" > "cobertura.xml"
+        run: xcresultparser -o xml --project-root ${{github.workspace}} "TestResults.xcresult" > "cobertura.xml"
       - run: ls
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
