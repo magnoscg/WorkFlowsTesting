@@ -10,7 +10,7 @@ concurrency:
 
 jobs:
   build_and_test:
-    name: ${{ matrix.command }} on  ${{ matrix.platform }} (xcode ${{ matrix.xcode }}, ${{ matrix.macos }})
+    name: ${{ matrix.command }} on  iOS 16 (xcode ${{ matrix.xcode }}, ${{ matrix.macos }})
     runs-on: ${{ matrix.macos }}
     strategy:
       fail-fast: false
@@ -19,7 +19,7 @@ jobs:
         macos: ["macos-latest"]
         project: ["workflows/workflows.xcodeproj"]
         scheme: ["workflows"]
-        command: ["test"]
+        command: ["Test"]
         platform: ["platform=iOS Simulator,name=iPhone 14,OS=16.2"]
         exclude:
           - macos: "macos-11"
@@ -31,10 +31,13 @@ jobs:
           - platform: "watchOS"
             xcode: "12.0.1"
     steps:
-      - name: XcresultParser install
-        run: |
-            brew tap a7ex/homebrew-formulae
-            brew install xcresultparser
+     # - name: XcresultParser install
+      #  run: |
+      #      brew tap a7ex/homebrew-formulae
+       #     brew install xcresultparser
+
+      - name: Install Dependencies
+        run: gem install slather
       - name: Switch xcode to ${{ matrix.xcode }}
         uses: maxim-lobanov/setup-xcode@v1.2.3
         with:
@@ -71,8 +74,13 @@ jobs:
         with:
           path: TestResults.xcresult
         if: success() || failure()
-      - name: Convert test results for codecov
-        run: xcresultparser -o cobertura --project-root ${{github.workspace}} "TestResults.xcresult" > "cobertura.xml"
+
+      #- name: Convert test results for codecov
+      #  run: xcresultparser -o cobertura --project-root ${{github.workspace}} "TestResults.xcresult" > "cobertura.xml"
+
+      - name: Convert code coverage for CI_macOS
+        run: slather coverage -x --scheme ${{ matrix.scheme }} --output-directory "slather_reports/CI_macOS" -b "DerivedData" "${{ matrix.project }}"
+      
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         with:
