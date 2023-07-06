@@ -66,16 +66,13 @@ jobs:
           ONLY_ACTIVE_ARCH=YES \
           -resultBundlePath TestResults \
           -derivedDataPath DerivedData \
-      - run: ls
       - name: Generate report
         uses: kishikawakatsumi/xcresulttool@v1.7.1
         with:
           path: TestResults.xcresult
         if: success() || failure()
-      - run: ls
       - name: Convert test results for codecov
-        run: xcresultparser -o xml --project-root ${{github.workspace}} "TestResults.xcresult" > "cobertura.xml"
-      - run: ls
+        run: xcresultparser -o cobertura --project-root ${{github.workspace}} "TestResults.xcresult" > "cobertura.xml"
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         with:
